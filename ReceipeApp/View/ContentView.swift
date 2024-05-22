@@ -13,21 +13,21 @@ struct ContentView: View {
         NavigationView {
             List(dessertList) { dessert in
                 VStack {
-                    //                Text(dessert.strMeal)
                     NavigationLink {
                         DessertMainView(mealId: dessert.idMeal)
+                            .navigationBarTitle(dessert.strMeal, displayMode: .inline)
                     } label: {
-                        DessertListView(name: dessert.strMeal, url: dessert.strMealThumb)
+                        DessertListView(name: dessert.strMeal, url: dessert.strMealThumb, qty: nil)
                     }
-                    
                 }
                 .padding()
             }
             .task {
                 dessertList = await ContentViewModel().displayDessertsClicked()!
             }
-            .navigationTitle("List")
-        } 
+            .navigationTitle("Receipes")
+        }
+        .listStyle(PlainListStyle())
     }
 }
 
