@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var dessertList: [Dessert] = [Dessert]()
     var body: some View {
-        NavigationSplitView {
+        NavigationView {
             List(dessertList) { dessert in
                 VStack {
                     //                Text(dessert.strMeal)
@@ -27,9 +27,7 @@ struct ContentView: View {
                 dessertList = await ContentViewModel().displayDessertsClicked()!
             }
             .navigationTitle("List")
-        } detail: {
-            Text("Select a Recipe")
-        }
+        } 
     }
 }
 
