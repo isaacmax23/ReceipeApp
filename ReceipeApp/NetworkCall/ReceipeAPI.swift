@@ -8,6 +8,7 @@
 import Foundation
 let desserrtsURL = "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert"
 let receipeURL = "https://themealdb.com/api/json/v1/1/lookup.php?i="
+
 class ReceipeAPI {
     func fetchDessertList() async throws -> [Dessert] {
         let url = URL(string: desserrtsURL)!

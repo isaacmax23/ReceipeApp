@@ -10,9 +10,12 @@ import SwiftUI
 
 struct OnboardingView: View {
     var body: some View {
-        Text("Welcome to the Recipe App!")
-            .font(.title)
-            .fontWeight(.bold)
-            .padding()
+        VStack{
+            Image("cookies")
+            Text("Welcome to the Recipe App!")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding()
+        }
     }
 }
