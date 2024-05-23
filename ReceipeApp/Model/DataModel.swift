@@ -131,28 +131,42 @@ struct Meal: Codable {
            ].compactMap { $0 }.filter { !$0.isEmpty }
        }
     
+    var paddedMeasures: [String] {
+        var paddedMeasures = measures
+           
+           // Pad the measures array with empty strings if it's shorter than ingredients
+           while paddedMeasures.count < ingredients.count {
+               paddedMeasures.append("")
+           }
+        
+        while paddedMeasures.count > ingredients.count {
+            paddedMeasures.removeLast()
+        }
+        
+        return paddedMeasures
+    }
     
-//    var ingredientsWithMeasures: [(ingredient: String, measure: String)] {
-//          let ingredientsArray = ingredients
-//          let measuresArray = measures
-//          let combined = zip(ingredientsArray, measuresArray).map { ($0, $1) }
-//          return combined
-//      }
+//    var safeDict: [String: String] {
+//        var dict = [String: String]()
+//           for (ingredient, measure) in zip(ingredients, measures) {
+//               dict[ingredient] = measure
+//           }
+//           return dict
+//    }
+    
+//    var safeDict: [(ingredient: String, measure1: String)] {
+//        var tuple = [(ingredient: String, measure1: String)]()
+//        var paddedMeasures = measures
+//           
+//           // Pad the measures array with empty strings if it's shorter than ingredients
+//           while paddedMeasures.count < ingredients.count {
+//               paddedMeasures.append("")
+//           }
 //
-//      var ingredientsWithIndex: [(index: Int, ingredient: String, measure: String)] {
-//          return Array(ingredientsWithMeasures.enumerated()).map { ($0.offset + 1, $0.element.ingredient, $0.element.measure) }
-//      }
+//           return Array(zip(ingredients, paddedMeasures))
+//    }
 }
 
 struct MealsResponse: Codable {
     let meals: [Meal]
 }
-
-//struct Meal: Codable {
-//let idMeal: String
-//    let strMeal: String
-//    let strMealThumb: String
-//    let strInstructions:String
-//    let strIngredient1: String
-//    let strMeasure1: String
-//}

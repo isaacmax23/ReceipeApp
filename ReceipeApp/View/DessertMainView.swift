@@ -14,7 +14,7 @@ struct DessertMainView: View {
     let mealId: String
     var body: some View {
         VStack {
-          ScrollView {
+            ScrollView {
                 AsyncImage(url: URL(string: meal?.strMealThumb ?? "")) { image in
                     image.resizable()
                 } placeholder: {
@@ -23,11 +23,10 @@ struct DessertMainView: View {
                 .frame(width: 128, height: 128)
                 .clipShape(.circle)
                 .padding(.bottom)
+                
                 Text(meal?.strInstructions ?? "")
                     .padding(.bottom)
-                if let ing = meal?.ingredients, let qty = meal?.measures {
-                                    var n = ing.count
-
+                if let ing = meal?.ingredients, let qty = meal?.paddedMeasures {
                     LazyVGrid(columns: columns) {
                         Text("Ingredients")
                             .bold()
@@ -39,7 +38,7 @@ struct DessertMainView: View {
 
                             .font(.title2)
 
-                        ForEach(Array(0..<n), id: \.self) { i in
+                        ForEach(Array(0..<ing.count), id: \.self) { i in
                             Text(ing[i])
                             Text(qty[i])
                         }
@@ -47,15 +46,13 @@ struct DessertMainView: View {
                     .padding(.all)
                 }
             }
-                
         }
         .padding(.all)
-
         .task {
             do{
              meal  =  try await ReceipeAPI().fetchReceipe(mealID: mealId)
             } catch {
-                
+                meal = nil
             }
         }
     }
