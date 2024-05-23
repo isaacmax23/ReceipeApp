@@ -26,21 +26,21 @@ struct DessertMainView: View {
                 
                 Text(meal?.strInstructions ?? "")
                     .padding(.bottom)
-                if let ing = meal?.ingredients, let qty = meal?.paddedMeasures {
+                if let ingredients = meal?.ingredients, let qty = meal?.paddedMeasures {
                     LazyVGrid(columns: columns) {
                         Text("Ingredients")
                             .bold()
-
                             .font(.title2)
-
-                        Text("Qty")
+                        Text("Quantity")
                             .bold()
-
                             .font(.title2)
-
-                        ForEach(Array(0..<ing.count), id: \.self) { i in
-                            Text(ing[i])
+                        Divider()
+                        Divider()
+                        ForEach(Array(0..<ingredients.count), id: \.self) { i in
+                            Text(ingredients[i])
                             Text(qty[i])
+                            Divider()
+                            Divider()
                         }
                     }
                     .padding(.all)
@@ -50,7 +50,7 @@ struct DessertMainView: View {
         .padding(.all)
         .task {
             do{
-             meal  =  try await ReceipeAPI().fetchReceipe(mealID: mealId)
+             meal = try await ReceipeAPI().fetchReceipe(mealID: mealId)
             } catch {
                 meal = nil
             }

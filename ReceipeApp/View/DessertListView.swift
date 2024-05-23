@@ -14,6 +14,7 @@ struct DessertListView: View {
     let qty: String?
     var body: some View {
         HStack{
+            Spacer()
             if let url = url {
                 AsyncImage(url: URL(string: url)) { image in
                     image.resizable()
@@ -23,8 +24,10 @@ struct DessertListView: View {
                 .frame(width: 128, height: 128)
                 .clipShape(.rect(cornerRadius: 25))
             }
+            Spacer()
             Text(name)
-                .frame(maxWidth: .infinity,alignment: .leading)
+                .frame(maxWidth: .infinity,alignment: .center)
+            Spacer()
             if let qty = qty {
                 Text(qty)
             }

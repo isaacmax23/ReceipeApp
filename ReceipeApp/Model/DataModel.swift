@@ -15,11 +15,6 @@ struct MealArray: Codable {
     let meal: [Meal]
 }
 
-struct IndexedString: Identifiable, Hashable {
-    let id = UUID()
-    let string: String
-}
-
 struct Dessert: Codable, Identifiable, Equatable{
     let strMeal: String
     let strMealThumb: String
@@ -29,7 +24,6 @@ struct Dessert: Codable, Identifiable, Equatable{
         return idMeal
     }
 }
-
 
 struct Meal: Codable {
     let idMeal: String
@@ -136,40 +130,21 @@ struct Meal: Codable {
            ].compactMap { $0 }.filter { !$0.isEmpty }
        }
     
-    var paddedMeasures: [String] {
-        var paddedMeasures = measures
-           
-           // Pad the measures array with empty strings if it's shorter than ingredients
-           while paddedMeasures.count < ingredients.count {
-               paddedMeasures.append("")
-           }
-        
-        while paddedMeasures.count > ingredients.count {
-            paddedMeasures.removeLast()
-        }
-        
-        return paddedMeasures
+var paddedMeasures: [String] {
+    var paddedMeasures = measures
+       
+       // Pad the measures array with empty strings if it's shorter than ingredients
+       while paddedMeasures.count < ingredients.count {
+           paddedMeasures.append("")
+       }
+    
+    // if there are extra in measures array they should be removed
+    while paddedMeasures.count > ingredients.count {
+        paddedMeasures.removeLast()
     }
     
-//    var safeDict: [String: String] {
-//        var dict = [String: String]()
-//           for (ingredient, measure) in zip(ingredients, measures) {
-//               dict[ingredient] = measure
-//           }
-//           return dict
-//    }
-    
-//    var safeDict: [(ingredient: String, measure1: String)] {
-//        var tuple = [(ingredient: String, measure1: String)]()
-//        var paddedMeasures = measures
-//           
-//           // Pad the measures array with empty strings if it's shorter than ingredients
-//           while paddedMeasures.count < ingredients.count {
-//               paddedMeasures.append("")
-//           }
-//
-//           return Array(zip(ingredients, paddedMeasures))
-//    }
+    return paddedMeasures
+}
 }
 
 struct MealsResponse: Codable {

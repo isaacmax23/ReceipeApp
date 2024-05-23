@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F527C6E02C0002160000E887 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527C6DF2C0002160000E887 /* OnboardingView.swift */; };
 		F54C922A2BFD1B57000CB3EF /* ReceipeAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54C92292BFD1B57000CB3EF /* ReceipeAppApp.swift */; };
 		F54C922C2BFD1B57000CB3EF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54C922B2BFD1B57000CB3EF /* HomeView.swift */; };
 		F54C922E2BFD1B58000CB3EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F54C922D2BFD1B58000CB3EF /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F527C6DF2C0002160000E887 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		F54C92262BFD1B57000CB3EF /* ReceipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReceipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54C92292BFD1B57000CB3EF /* ReceipeAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceipeAppApp.swift; sourceTree = "<group>"; };
 		F54C922B2BFD1B57000CB3EF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				F54C922B2BFD1B57000CB3EF /* HomeView.swift */,
 				F58D1D722BFD54D80042C2F1 /* DessertListView.swift */,
 				F58D1D742BFD59B00042C2F1 /* DessertMainView.swift */,
+				F527C6DF2C0002160000E887 /* OnboardingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				F58D1D6E2BFD3A1D0042C2F1 /* DataModel.swift in Sources */,
 				F54C922A2BFD1B57000CB3EF /* ReceipeAppApp.swift in Sources */,
 				F58D1D732BFD54D80042C2F1 /* DessertListView.swift in Sources */,
+				F527C6E02C0002160000E887 /* OnboardingView.swift in Sources */,
 				F58D1D6B2BFD30810042C2F1 /* ReceipeAPI.swift in Sources */,
 				F58D1D702BFD3CD60042C2F1 /* ContentViewModel.swift in Sources */,
 			);
