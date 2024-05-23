@@ -14,7 +14,7 @@ struct DessertMainView: View {
     let mealId: String
     var body: some View {
         VStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 AsyncImage(url: URL(string: meal?.strMealThumb ?? "")) { image in
                     image.resizable()
                 } placeholder: {
