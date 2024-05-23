@@ -12,7 +12,12 @@ struct HomeView: View {
     @State private var dessertList: [Dessert] = [Dessert]()
     @State private var searchText = ""
     @State private var letterToFirstDessert: [String: String] = [:]
-
+    private var alphabet: [String] {
+        let letters = dessertList
+            .map { String($0.strMeal.prefix(1)).uppercased() }
+        return Array(Set(letters)).sorted()
+    }
+    
     var body: some View {
             NavigationView {
                 VStack {
@@ -33,7 +38,7 @@ struct HomeView: View {
                                 }
                             }
                             Spacer()
-                            ScrollIndexView(dessertList: dessertList, proxy: proxy)
+                            ScrollIndexView(dessertList: dessertList , proxy: proxy)
                         }
                     }
                     .padding()
@@ -77,42 +82,37 @@ struct ClippedTextField: View {
 }
 
 struct ScrollIndexView: View {
-    var dessertList: [String]
-//    @Binding var dessert: [String]
+    var dessertList: [Dessert]
     var proxy: ScrollViewProxy
     @State private var selectedLetter: String? = nil
     
-    private var indexedStrings: [IndexedString] {
-        var map: [IndexedString]
-        for mealName in dessertList {
-            map.append(IndexedString(string: mealName))
+    private var alphabet: [String] {
+            return Array(Set(dessertList.compactMap { $0.strMeal.prefix(1).uppercased() })).sorted()
         }
-        return map
-    }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack {
-//                ForEach(Array(dessertList.keys).sorted(), id: \.self) { letter in
-                ForEach(indexedStrings, id: \.id) { indexed in
-                    let letter = indexed.string
-                    Text(letter)
-                        .font(.headline)
-                        .padding(.vertical, 4)
-                        .foregroundColor(selectedLetter == letter ? .blue : .primary)
-                        .onTapGesture {
-                            selectedLetter = letter
-                            let dessert = dessertList.first{ $0.prefix(1).uppercased() == letter }
-//                            if let id = dessertList[selectedLetter ?? ""]{
+
+                ForEach(alphabet, id: \.self) { letter in
+                        Text(letter)
+                            .font(.headline)
+                            .padding(.vertical, 4)
+                            .foregroundColor(selectedLetter == letter ? .blue : .primary)
+                            .onTapGesture {
+                                                            selectedLetter = letter
+                                let dessert = dessertList.first{ $0.strMeal.prefix(1).uppercased() == letter }
+                                if let id = dessert?.idMeal{
                                 withAnimation {
-                                    proxy.scrollTo(indexed.id, anchor: .top)
+                                    proxy.scrollTo(id, anchor: .top)
                                 }
-//                            }
-                        }
-                }
+                                                            }
+                            }
+                    }
             }
             .frame(width: 30,alignment: .trailing)
         }
+       
     }
 }
 

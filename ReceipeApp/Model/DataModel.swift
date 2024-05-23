@@ -15,7 +15,7 @@ struct MealArray: Codable {
     let meal: [Meal]
 }
 
-struct IndexedString: Identifiable {
+struct IndexedString: Identifiable, Hashable {
     let id = UUID()
     let string: String
 }
