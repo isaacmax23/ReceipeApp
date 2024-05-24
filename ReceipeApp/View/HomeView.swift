@@ -16,7 +16,7 @@ struct HomeView: View {
         if !isOnboardingComplete {
             OnboardingView()
                 .onAppear {
-                   // Use a Timer to change the state after 5 seconds
+                   // Use a Timer to change the view to home after 5 seconds
                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                        isOnboardingComplete = true
                    }
@@ -57,6 +57,7 @@ struct HomeView: View {
     }
 }
 
+// TextField can be reused
 struct ClippedTextField: View {
     @Binding var text: String
     
@@ -68,6 +69,7 @@ struct ClippedTextField: View {
     }
 }
 
+// scroll index can be reused
 struct ScrollIndexView: View {
     var dessertList: [Dessert]
     var proxy: ScrollViewProxy
@@ -77,7 +79,8 @@ struct ScrollIndexView: View {
         return Array(Set(dessertList.compactMap { $0.strMeal.prefix(1).uppercased() })).sorted()
     }
     
-    private  var updateLetterToFirstDessert: [String: String] {
+    // Index letter and first meal that matches it
+    private  var alphabetMealDict: [String: String] {
         var map = [String: String]()
         for dessert in dessertList {
            let letter = String(dessert.strMeal.prefix(1)).uppercased()
@@ -98,7 +101,7 @@ struct ScrollIndexView: View {
                             .foregroundColor(selectedLetter == letter ? .blue : .primary)
                             .onTapGesture {
                                 selectedLetter = letter
-                                let dessertId = firstMealMatch(firstLetter: letter)
+                                let dessertId = alphabetMealDict[letter]
                                 if let id = dessertId {
                                     withAnimation {
                                         proxy.scrollTo(id, anchor: .top)
@@ -109,10 +112,6 @@ struct ScrollIndexView: View {
             }
             .frame(width: 30,alignment: .trailing)
         }
-    }
-    
-    private func firstMealMatch(firstLetter: String) -> String? {
-        return updateLetterToFirstDessert[firstLetter]
     }
 }
 

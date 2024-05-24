@@ -106,7 +106,7 @@ struct Meal: Codable {
             strIngredient18,
             strIngredient19,
             strIngredient20
-        ].compactMap { $0 }.filter { !$0.isEmpty }
+        ].compactMap { $0 }.filter { !$0.isEmpty } // filter out null & empty strings
     }
     
     var measures: [String] {
@@ -131,7 +131,7 @@ struct Meal: Codable {
                strMeasure18,
                strMeasure19,
                strMeasure20
-           ].compactMap { $0 }.filter { !$0.isEmpty }
+           ].compactMap { $0 }.filter { !$0.isEmpty } // filter out null & empty strings
        }
     
         var paddedMeasures: [String] {

@@ -13,7 +13,7 @@ class ContentViewModel {
         var dessertList: [Dessert]?
         do {
             dessertList = try await ReceipeAPI().fetchDessertList()
-            dessertList = dessertList?.filter {!$0.strMeal.isEmpty || !$0.idMeal.isEmpty}
+            dessertList = dessertList?.filter {!$0.strMeal.isEmpty || !$0.idMeal.isEmpty} // filter out empty strings
             dessertList?.sort { $0.strMeal < $1.strMeal }
         } catch {
             dessertList = nil
