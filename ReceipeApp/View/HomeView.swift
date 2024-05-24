@@ -11,7 +11,7 @@ struct HomeView: View {
     @State private var dessertList: [Dessert] = [Dessert]()
     @State private var searchText = ""
     @State private var isOnboardingComplete = false
-    @State private var mainTitle = "Receipes"
+    
     var body: some View {
         if !isOnboardingComplete {
             OnboardingView()
@@ -29,27 +29,32 @@ struct HomeView: View {
                     ClippedTextField(text: $searchText)
                         .padding([.leading,.trailing])
                         .frame(alignment: .top)
-                    
-                    ScrollViewReader { proxy in
-                        HStack {
-                            List(dessertList.filter {
-                                self.searchText.isEmpty ||
-                                $0.strMeal.localizedCaseInsensitiveContains(searchText)
-                            }) { dessert in
-                                NavigationLink {
-                                    DessertMainView(mealId: dessert.idMeal)
-                                } label: {
-                                    DessertListView(name: dessert.strMeal, url: dessert.strMealThumb, qty: nil)
+                    if dessertList.count > 0 {
+                        ScrollViewReader { proxy in
+                            HStack {
+                                List(dessertList.filter {
+                                    self.searchText.isEmpty ||
+                                    $0.strMeal.localizedCaseInsensitiveContains(searchText)
+                                }) { dessert in
+                                    NavigationLink {
+                                        DessertMainView(mealId: dessert.idMeal)
+                                    } label: {
+                                        DessertListView(name: dessert.strMeal, url: dessert.strMealThumb, qty: nil)
+                                    }
                                 }
+                                Spacer()
+                                ScrollIndexView(dessertList: dessertList , proxy: proxy)
                             }
-                            Spacer()
-                            ScrollIndexView(dessertList: dessertList , proxy: proxy)
                         }
+                        .padding()
+                    } else {
+                        Text("Sorry, No network connection")
+                        Spacer()
                     }
-                    .padding()
-                    .task {
-                        dessertList = await HomeViewModel().loadDessertsList() ?? []
-                    }
+                    
+                }
+                .task {
+                    dessertList = await HomeViewModel().loadDessertsList() ?? []
                 }
             }
             .navigationViewStyle(StackNavigationViewStyle())
