@@ -8,6 +8,7 @@
 - Built using SwiftUI
 - No external libraries
 - Focussed on code reusability & folling MVVM principles
+- Tested with smaller screens, larger devices & a real device. iPhone SE, iPhone 15 & iPad Pro 13-inch
 
 
 ## General Demo
