@@ -8,7 +8,8 @@
 import Foundation
 
 class ContentViewModel {
-    func displayDessertsClicked() async  -> [Dessert]? {
+    
+    func loadDessertsList() async  -> [Dessert]? {
         var dessertList: [Dessert]?
         do {
             dessertList = try await ReceipeAPI().fetchDessertList()
@@ -19,4 +20,5 @@ class ContentViewModel {
         }
         return dessertList
     }
+    
 }

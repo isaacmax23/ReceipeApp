@@ -7,13 +7,17 @@
 
 import Foundation
 
+
+// wrapper struct to get list of desserts
 struct Receipe: Codable {
     let meals: [Dessert]
 }
 
-struct MealArray: Codable {
-    let meal: [Meal]
+// wrapper struct
+struct MealsResponse: Codable {
+    let meals: [Meal]
 }
+
 
 struct Dessert: Codable, Identifiable, Equatable{
     let strMeal: String
@@ -130,23 +134,19 @@ struct Meal: Codable {
            ].compactMap { $0 }.filter { !$0.isEmpty }
        }
     
-var paddedMeasures: [String] {
-    var paddedMeasures = measures
-       
-       // Pad the measures array with empty strings if it's shorter than ingredients
-       while paddedMeasures.count < ingredients.count {
-           paddedMeasures.append("")
-       }
-    
-    // if there are extra in measures array they should be removed
-    while paddedMeasures.count > ingredients.count {
-        paddedMeasures.removeLast()
-    }
-    
-    return paddedMeasures
-}
-}
-
-struct MealsResponse: Codable {
-    let meals: [Meal]
+        var paddedMeasures: [String] {
+            var paddedMeasures = measures
+               
+               // Pad the measures array with empty strings if it's shorter than ingredients
+               while paddedMeasures.count < ingredients.count {
+                   paddedMeasures.append("")
+               }
+            
+            // if there are extra in measures array they should be removed
+            while paddedMeasures.count > ingredients.count {
+                paddedMeasures.removeLast()
+            }
+            
+            return paddedMeasures
+        }
 }

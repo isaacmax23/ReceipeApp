@@ -26,6 +26,7 @@ struct HomeView: View {
                 VStack {
                     ClippedTextField(text: $searchText)
                         .padding([.leading,.trailing])
+                    
                     ScrollViewReader { proxy in
                         HStack {
                             List(dessertList.filter {
@@ -45,7 +46,7 @@ struct HomeView: View {
                     }
                     .padding()
                     .task {
-                        dessertList = await ContentViewModel().displayDessertsClicked()!
+                        dessertList = await ContentViewModel().loadDessertsList()!
                     }
                     .navigationTitle("Receipes")
                 }
