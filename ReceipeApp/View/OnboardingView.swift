@@ -12,7 +12,8 @@ struct OnboardingView: View {
     var body: some View {
         VStack{
             Image("cookies")
-            Text("Welcome to the Recipe App!")
+                .clipShape(.circle)
+            Text("Recipe App!")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding()

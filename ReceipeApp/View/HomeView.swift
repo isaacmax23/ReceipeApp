@@ -11,7 +11,7 @@ struct HomeView: View {
     @State private var dessertList: [Dessert] = [Dessert]()
     @State private var searchText = ""
     @State private var isOnboardingComplete = false
-    
+    @State private var mainTitle = "Receipes"
     var body: some View {
         if !isOnboardingComplete {
             OnboardingView()
@@ -24,8 +24,11 @@ struct HomeView: View {
         } else {
             NavigationView {
                 VStack {
+                    HeadingView(text: "Receipes")
+                    
                     ClippedTextField(text: $searchText)
                         .padding([.leading,.trailing])
+                        .frame(alignment: .top)
                     
                     ScrollViewReader { proxy in
                         HStack {
@@ -35,7 +38,6 @@ struct HomeView: View {
                             }) { dessert in
                                 NavigationLink {
                                     DessertMainView(mealId: dessert.idMeal)
-                                        .navigationBarTitle(dessert.strMeal, displayMode: .inline)
                                 } label: {
                                     DessertListView(name: dessert.strMeal, url: dessert.strMealThumb, qty: nil)
                                 }
@@ -46,14 +48,28 @@ struct HomeView: View {
                     }
                     .padding()
                     .task {
-                        dessertList = await ContentViewModel().loadDessertsList()!
+                        dessertList = await HomeViewModel().loadDessertsList() ?? []
                     }
-                    .navigationTitle("Receipes")
                 }
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .listStyle(PlainListStyle())
         }
+    }
+}
+
+
+// MARK: - Reusable Views
+
+struct HeadingView: View {
+     var text: String
+    
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .multilineTextAlignment(.center)
+            .padding()
     }
 }
 
@@ -112,6 +128,22 @@ struct ScrollIndexView: View {
             }
             .frame(width: 30,alignment: .trailing)
         }
+    }
+}
+
+
+struct ImageView: View {
+    let imageURL: String?
+    
+    var body: some View {
+        AsyncImage(url: URL(string: imageURL ?? "")) { image in
+            image.resizable()
+        } placeholder: {
+            Text("No Image :(")
+        }
+        .frame(width: 128, height: 128)
+        .clipShape(.circle)
+        .padding(.bottom)
     }
 }
 

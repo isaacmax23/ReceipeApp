@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ContentViewModel {
+class HomeViewModel {
     
     func loadDessertsList() async  -> [Dessert]? {
         var dessertList: [Dessert]?

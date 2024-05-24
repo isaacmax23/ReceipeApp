@@ -15,14 +15,10 @@ struct DessertMainView: View {
     var body: some View {
         VStack {
             ScrollView(showsIndicators: false) {
-                AsyncImage(url: URL(string: meal?.strMealThumb ?? "")) { image in
-                    image.resizable()
-                } placeholder: {
-                    Text("No Image :(")
-                }
-                .frame(width: 128, height: 128)
-                .clipShape(.circle)
-                .padding(.bottom)
+                
+                HeadingView(text: meal?.strMeal ?? "Sorry not available")
+              
+                ImageView(imageURL: meal?.strMealThumb)
                 
                 Text(meal?.strInstructions ?? "")
                     .padding(.bottom)
