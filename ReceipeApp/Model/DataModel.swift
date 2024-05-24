@@ -19,7 +19,7 @@ struct MealsResponse: Codable {
 }
 
 
-struct Dessert: Codable, Identifiable, Equatable{
+struct Dessert: Codable, Identifiable {
     let strMeal: String
     let strMealThumb: String
     let idMeal: String
