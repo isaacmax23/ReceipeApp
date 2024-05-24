@@ -12,7 +12,7 @@
 
 ## General Demo
 
-- [Demo](https://github.com/isaacmax23/ReceipeApp/blob/develop/ReceipeAppDemo-General.gif)
+- ![](https://github.com/isaacmax23/ReceipeApp/blob/develop/ReceipeAppDemo-General.gif)
 
 ## Features Demo
 - Easier navigation with scroll Index & Search
