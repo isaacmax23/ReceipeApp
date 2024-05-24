@@ -1,5 +1,5 @@
 # Receipe App
-- Displays a lost of meals with detailed view for cooking instructions
+- Displays a list of meals with detailed view for cooking instructions
 
 ## App Details
 - Sort the receipe list alphabetically
