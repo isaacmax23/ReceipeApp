@@ -48,7 +48,7 @@ struct HomeView: View {
                         }
                         .padding()
                     } else {
-                        Text("Sorry, No network connection")
+                        Text("Loading ...")
                         Spacer()
                     }
                     
